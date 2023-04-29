@@ -1,71 +1,22 @@
+import { time_zone_with_value } from './lib/time_zone_with_value'
+import { time_zone } from './lib/time_zone'
+import { time_zone_specific_all } from './lib/time_zone_custom'
 
-import { close, mkdir, openSync, readFile, readFileSync, write } from 'fs'
 
-type JSONValue =
-    | string
-    | number
-    | boolean
-    | JSONObject
-    | JSONArray;
-
-interface JSONObject {
-    [x: string]: JSONValue;
+const time_zone_specific = ({ zone }: { zone: "Pacific" | "America" | "Atlantic" | "Antarctica" | "Africa" | "Etc" | "Europe" | "Asia" | "Indian" | "Australia" }) => {
+    return time_zone_specific_all.find((t) => {
+        if (t.zone == zone) {
+            return true
+        }
+        return false
+    })
 }
 
-interface JSONArray extends Array<JSONValue> { }
 
-function json_to_csv({ json, destination = '', file_name = 'test' }: { json: JSONArray, destination: string, file_name: string }) {
-    try {
-        let csvData = JSON.stringify(Object.keys(json?.[0]))?.slice(1, -1) + `
-`
-        for (const x of json) {
-            csvData += JSON.stringify(Object.values(x))?.slice(1, -1) + `
-`
-        }
 
-        const path = (Boolean(destination) ? (destination + '/') : "") + file_name + ".csv"
-        const csvFile = openSync(path, 'w+')
-        write(csvFile, csvData, function (err, result) {
-            if (err) {
-                return {
-                    success: false, message: 'something is wrong'
-                }
-            }
-            else {
-                readFile(path, function (err, data) {
-                    if (err) {
-                        return {
-                            success: false, message: 'something is wrong'
-                        }
-                    }
-                    else {
-                        console.log({
-                            success: true, message: `successfully inserted into ${destination}/${file_name}.csv`,
-                            data: data.toString()
-                        })
-                        close(csvFile, (err) => {
-                            if (err)
-                                console.error('Failed to close file', err);
-                            else {
-                                console.log("\n> File Closed successfully");
-                            }
-                        });
-                        return {
-                            success: true, message: `successfully inserted into ${destination}/${file_name}.csv`,
-                            data: data.toString()
-                        }
-                    }
-                });
-            }
-        })
-    }
-    catch (err) {
-        if (err.errno == -4058) {
-            return { success: false, message: 'no such file or directory' }
-        }
-        return {
-            success: false, message: 'something is wrong'
-        }
-    }
+export {
+    time_zone_with_value,
+    time_zone,
+    time_zone_specific_all,
+    time_zone_specific
 }
-export default json_to_csv
