@@ -1,6 +1,6 @@
 {
   "name": "time_zone_world",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,10 +16,10 @@
     "url": "https://github.com/SRAKIB17/time_zone_world_npm_package/issues"
   },
   "keywords": [
-    "csv",
-    "json",
-    "generator",
-    "converter",
+    "time",
+    "zone",
+    "time_zone",
+    "world",
     "node"
   ],
   "homepage": "https://github.com/SRAKIB17/time_zone_world_npm_package#readme",
