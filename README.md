@@ -1,4 +1,4 @@
-# version 1.0.3
+# version 1.0.4
 
 ```
 npm i time_zone_world

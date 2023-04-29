@@ -1,6 +1,6 @@
 {
   "name": "time_zone_world",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,8 @@
     "zone",
     "time_zone",
     "world",
+    "country",
+    "code",
     "node"
   ],
   "homepage": "https://github.com/SRAKIB17/time_zone_world_npm_package#readme",
